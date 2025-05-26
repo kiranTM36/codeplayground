@@ -1,51 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" itemscope itemtype="https://schema.org/WebApplication">
 <head>
     <!-- Primary Meta Tags -->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     
     <!-- SEO Title (58 characters) -->
-    <title>Code Playground | Live HTML, CSS, JavaScript Editor by Kiran TM</title>
+    <title>Live Code Playground | HTML, CSS, JavaScript Editor by Kiran TM</title>
     
     <!-- SEO Description (154 characters) -->
-    <meta name="description" content="Interactive online code editor for HTML, CSS, and JavaScript with live preview. Perfect for testing code snippets and learning web development.">
+    <meta name="description" content="Free online code editor with live preview. Test HTML, CSS & JavaScript snippets instantly. Perfect for learning web development and debugging code.">
     
     <!-- Keywords -->
-    <meta name="keywords" content="online code editor, HTML playground, CSS tester, JavaScript sandbox, web development tools, frontend coding">
+    <meta name="keywords" content="online code editor, HTML playground, CSS tester, JavaScript sandbox, web development tools, frontend coding, code testing, web developer tools">
     
     <!-- Author and Copyright -->
     <meta name="author" content="Kiran TM">
     <meta name="copyright" content="Kiran TM">
     
     <!-- Open Graph / Social Media Meta Tags -->
-    <meta property="og:title" content="Interactive Code Playground by Kiran TM">
-    <meta property="og:description" content="Real-time HTML, CSS, and JavaScript editor with live preview">
+    <meta property="og:title" content="Live Code Playground - HTML/CSS/JS Editor">
+    <meta property="og:description" content="Real-time web development environment with instant preview. Test your code snippets in the browser.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://kirantm36.github.io/codeplayground/">
     <meta property="og:image" content="https://kirantm36.github.io/codeplayground/assets/social-preview.png">
+    <meta property="og:image:alt" content="Screenshot of the code playground interface">
     <meta property="og:site_name" content="Kiran TM's Code Playground">
+    <meta property="og:locale" content="en_US">
     
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:creator" content="@kirantm36">
-    <meta name="twitter:title" content="Code Playground by Kiran TM">
-    <meta name="twitter:description" content="Interactive web development environment for HTML, CSS and JavaScript">
+    <meta name="twitter:site" content="@kirantm36">
+    <meta name="twitter:title" content="Live Code Playground by Kiran TM">
+    <meta name="twitter:description" content="Interactive web development environment for HTML, CSS and JavaScript with real-time preview">
+    <meta name="twitter:image" content="https://kirantm36.github.io/codeplayground/assets/social-preview.png">
+    <meta name="twitter:image:alt" content="Code playground interface screenshot">
     
     <!-- Canonical URL -->
     <link rel="canonical" href="https://kirantm36.github.io/codeplayground/">
     
-    <!-- Favicon -->
+    <!-- Favicon and App Icons -->
     <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+    <link rel="manifest" href="manifest.webmanifest">
     
-    <!-- Preload Resources -->
+    <!-- Preload Critical Resources -->
     <link rel="preload" href="styles.css" as="style">
     <link rel="preload" href="script.js" as="script">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Segoe+UI:wght@400;600&display=swap" as="style" crossorigin>
     
     <!-- CSS -->
     <link rel="stylesheet" href="styles.css">
- :root {
+    :root {
   --primary-color: #4a6fa5;
   --secondary-color: #166088;
   --dark-color: #1a2639;
@@ -415,14 +423,30 @@ textarea {
     min-height: 100vh;
   }
 }
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Segoe+UI:wght@400;600&display=swap">
+    
+    <!-- No-JS Fallback -->
+    <noscript>
+        <style>
+            .js-required { display: none; }
+            .no-js-message {
+                display: block;
+                padding: 1rem;
+                background: #ff9800;
+                color: #000;
+                text-align: center;
+                margin: 1rem 0;
+            }
+        </style>
+    </noscript>
     
     <!-- Structured Data -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebApplication",
-      "name": "Code Playground",
-      "description": "Interactive online code editor for HTML, CSS, and JavaScript",
+      "name": "Live Code Playground",
+      "description": "Interactive online code editor for HTML, CSS, and JavaScript with real-time preview",
       "url": "https://kirantm36.github.io/codeplayground/",
       "applicationCategory": "DeveloperApplication",
       "operatingSystem": "Web Browser",
@@ -433,29 +457,48 @@ textarea {
       },
       "author": {
         "@type": "Person",
-        "name": "Kiran TM"
-      }
+        "name": "Kiran TM",
+        "url": "https://github.com/kirantm36",
+        "sameAs": [
+          "https://linkedin.com/in/kirantm",
+          "https://twitter.com/kirantm36"
+        ]
+      },
+      "interactionStatistic": {
+        "@type": "InteractionCounter",
+        "interactionType": "https://schema.org/UseAction",
+        "userInteractionCount": "1000"
+      },
+      "screenshot": "https://kirantm36.github.io/codeplayground/assets/social-preview.png",
+      "softwareVersion": "1.0"
     }
     </script>
 </head>
 <body>
     <!-- Skip to Content Link for Accessibility -->
-    <a class="skip-link" href="#main-content">Skip to content</a>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    
+    <noscript>
+        <div class="no-js-message">
+            JavaScript is required for this code playground to function properly. Please enable JavaScript in your browser.
+        </div>
+    </noscript>
     
     <!-- Header Section -->
     <header class="page-header" role="banner">
         <div class="header-content">
-            <h1>Interactive Code Playground</h1>
-            <p class="subtitle">Experiment with HTML, CSS, and JavaScript in real-time</p>
-            <nav class="social-links" aria-label="Social media links">
-                <a href="https://github.com/kirantm36" aria-label="GitHub profile">GitHub</a>
-                <a href="https://linkedin.com/in/kirantm" aria-label="LinkedIn profile">LinkedIn</a>
+            <h1 itemprop="name">Interactive Code Playground</h1>
+            <p class="subtitle" itemprop="description">Experiment with HTML, CSS, and JavaScript in real-time</p>
+            <nav class="social-links" aria-label="Connect with me on social media">
+                <a href="https://github.com/kirantm36" aria-label="My GitHub profile (opens in new tab)" rel="noopener noreferrer" target="_blank">GitHub</a>
+                <a href="https://linkedin.com/in/kirantm" aria-label="My LinkedIn profile (opens in new tab)" rel="noopener noreferrer" target="_blank">LinkedIn</a>
+                <a href="https://twitter.com/kirantm36" aria-label="My Twitter profile (opens in new tab)" rel="noopener noreferrer" target="_blank">Twitter</a>
             </nav>
         </div>
     </header>
     
     <!-- Main Content -->
-    <main id="main-content" class="playground-container" role="main">
+    <main id="main-content" class="playground-container" role="main" itemprop="mainContentOfPage">
         <section class="editor-section" aria-labelledby="editor-heading">
             <h2 id="editor-heading" class="visually-hidden">Code Editor</h2>
             
@@ -468,47 +511,70 @@ textarea {
             
             <!-- Editor Areas -->
             <div class="editor-areas">
-                <textarea id="html-editor" class="code-editor active" role="tabpanel" aria-labelledby="html-tab" placeholder="<!-- Write your HTML here -->"></textarea>
-                <textarea id="css-editor" class="code-editor" role="tabpanel" aria-labelledby="css-tab" placeholder="/* Write your CSS here */"></textarea>
-                <textarea id="js-editor" class="code-editor" role="tabpanel" aria-labelledby="js-tab" placeholder="// Write your JavaScript here"></textarea>
+                <textarea id="html-editor" class="code-editor active" role="tabpanel" aria-labelledby="html-tab" placeholder="<!-- Write your HTML here -->" spellcheck="false"></textarea>
+                <textarea id="css-editor" class="code-editor" role="tabpanel" aria-labelledby="css-tab" placeholder="/* Write your CSS here */" spellcheck="false"></textarea>
+                <textarea id="js-editor" class="code-editor" role="tabpanel" aria-labelledby="js-tab" placeholder="// Write your JavaScript here" spellcheck="false"></textarea>
             </div>
             
             <!-- Control Buttons -->
             <div class="editor-controls">
-                <button id="run-button" class="control-button primary">Run Code</button>
-                <button id="reset-button" class="control-button secondary">Reset</button>
-                <button id="save-button" class="control-button">Save Snippet</button>
+                <button id="run-button" class="control-button primary" aria-label="Execute code">Run Code</button>
+                <button id="reset-button" class="control-button secondary" aria-label="Reset all editors">Reset</button>
+                <button id="save-button" class="control-button" aria-label="Save code snippet">Save Snippet</button>
+                <button id="share-button" class="control-button" aria-label="Share code snippet">Share</button>
             </div>
         </section>
         
         <!-- Output Section -->
         <section class="output-section" aria-labelledby="output-heading">
             <h2 id="output-heading">Live Output Preview</h2>
-            <iframe id="output-frame" title="Code execution result" sandbox="allow-scripts"></iframe>
+            <iframe id="output-frame" title="Code execution result" sandbox="allow-scripts allow-same-origin" loading="lazy"></iframe>
         </section>
         
         <!-- Features Section -->
-        <section class="features-section" aria-labelledby="features-heading">
+        <section class="features-section" aria-labelledby="features-heading" itemprop="featureList">
             <h2 id="features-heading">Playground Features</h2>
             <ul class="features-list">
-                <li>Real-time code execution</li>
-                <li>Separate editors for HTML, CSS, and JavaScript</li>
-                <li>Responsive output preview</li>
-                <li>No server-side processing - runs entirely in your browser</li>
-                <li>Mobile-friendly interface</li>
+                <li itemprop="feature">Real-time code execution with instant preview</li>
+                <li itemprop="feature">Separate editors for HTML, CSS, and JavaScript</li>
+                <li itemprop="feature">Responsive output preview for mobile testing</li>
+                <li itemprop="feature">Client-side processing - no server required</li>
+                <li itemprop="feature">Mobile-friendly interface</li>
+                <li itemprop="feature">Syntax highlighting (coming soon)</li>
+                <li itemprop="feature">Code sharing capabilities</li>
             </ul>
+        </section>
+        
+        <!-- Tutorial Section -->
+        <section class="tutorial-section" aria-labelledby="tutorial-heading">
+            <h2 id="tutorial-heading">How to Use This Playground</h2>
+            <div class="tutorial-steps">
+                <div class="step">
+                    <h3>1. Write Your Code</h3>
+                    <p>Type or paste your HTML, CSS, and JavaScript code into the respective editors.</p>
+                </div>
+                <div class="step">
+                    <h3>2. Run Your Code</h3>
+                    <p>Click the "Run Code" button to see your code execute in real-time.</p>
+                </div>
+                <div class="step">
+                    <h3>3. Debug & Experiment</h3>
+                    <p>Make changes and see results instantly without refreshing.</p>
+                </div>
+            </div>
         </section>
     </main>
     
     <!-- Footer -->
     <footer class="page-footer" role="contentinfo">
         <div class="footer-content">
-            <p>Created by <a href="https://github.com/kirantm36" rel="author">Kiran TM</a></p>
+            <p>Created by <a href="https://github.com/kirantm36" rel="author noopener noreferrer" target="_blank" itemprop="author">Kiran TM</a></p>
             <p>&copy; <span id="copyright-year"></span> All Rights Reserved</p>
             <nav aria-label="Footer navigation">
-                <a href="privacy.html">Privacy Policy</a>
-                <a href="terms.html">Terms of Use</a>
+                <a href="privacy.html" rel="nofollow">Privacy Policy</a>
+                <a href="terms.html" rel="nofollow">Terms of Use</a>
                 <a href="mailto:contact@example.com">Contact</a>
+                <a href="sitemap.xml">Sitemap</a>
             </nav>
         </div>
     </footer>
@@ -519,25 +585,29 @@ textarea {
         // Set copyright year
         document.getElementById('copyright-year').textContent = new Date().getFullYear();
         
-        // Simple tab switching functionality
-        document.querySelectorAll('.tab-button').forEach(tab => {
-            tab.addEventListener('click', () => {
-                // Remove active class from all tabs and editors
-                document.querySelectorAll('.tab-button, .code-editor').forEach(el => {
-                    el.classList.remove('active');
-                    el.setAttribute('aria-selected', 'false');
+        // Tab switching functionality
+        const setupTabs = () => {
+            const tabs = document.querySelectorAll('.tab-button');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Remove active state from all
+                    document.querySelectorAll('.tab-button, .code-editor').forEach(el => {
+                        el.classList.remove('active');
+                        el.setAttribute('aria-selected', 'false');
+                    });
+                    
+                    // Set active state
+                    tab.classList.add('active');
+                    tab.setAttribute('aria-selected', 'true');
+                    const editorId = tab.id.replace('-tab', '-editor');
+                    document.getElementById(editorId).classList.add('active');
                 });
-                
-                // Add active class to clicked tab and corresponding editor
-                tab.classList.add('active');
-                tab.setAttribute('aria-selected', 'true');
-                const editorId = tab.id.replace('-tab', '-editor');
-                document.getElementById(editorId).classList.add('active');
             });
-        });
+        };
         
-        // Run code functionality
-        document.getElementById('run-button').addEventListener('click', () => {
+        // Code execution functionality
+        const executeCode = () => {
             const html = document.getElementById('html-editor').value;
             const css = document.getElementById('css-editor').value;
             const js = document.getElementById('js-editor').value;
@@ -550,6 +620,8 @@ textarea {
                 <!DOCTYPE html>
                 <html>
                 <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
                     <style>${css}</style>
                 </head>
                 <body>
@@ -559,14 +631,73 @@ textarea {
                 </html>
             `);
             iframeDoc.close();
-        });
+        };
         
         // Reset functionality
-        document.getElementById('reset-button').addEventListener('click', () => {
+        const resetEditors = () => {
             document.getElementById('html-editor').value = '';
             document.getElementById('css-editor').value = '';
             document.getElementById('js-editor').value = '';
             document.getElementById('output-frame').srcdoc = '';
+        };
+        
+        // Share functionality
+        const shareCode = () => {
+            const code = {
+                html: document.getElementById('html-editor').value,
+                css: document.getElementById('css-editor').value,
+                js: document.getElementById('js-editor').value
+            };
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Check out this code snippet',
+                    text: 'I created this code in the Live Code Playground',
+                    url: window.location.href
+                }).catch(err => {
+                    console.log('Error sharing:', err);
+                    fallbackShare();
+                });
+            } else {
+                fallbackShare();
+            }
+            
+            function fallbackShare() {
+                const shareUrl = `${window.location.href}?html=${encodeURIComponent(code.html)}&css=${encodeURIComponent(code.css)}&js=${encodeURIComponent(code.js)}`;
+                prompt('Copy this link to share your code:', shareUrl);
+            }
+        };
+        
+        // Load shared code from URL
+        const loadSharedCode = () => {
+            const params = new URLSearchParams(window.location.search);
+            if (params.has('html') || params.has('css') || params.has('js')) {
+                document.getElementById('html-editor').value = params.get('html') || '';
+                document.getElementById('css-editor').value = params.get('css') || '';
+                document.getElementById('js-editor').value = params.get('js') || '';
+                executeCode();
+            }
+        };
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            setupTabs();
+            loadSharedCode();
+            
+            document.getElementById('run-button').addEventListener('click', executeCode);
+            document.getElementById('reset-button').addEventListener('click', resetEditors);
+            document.getElementById('share-button').addEventListener('click', shareCode);
+            
+            // Auto-run after 2 seconds of inactivity
+            let typingTimer;
+            const editors = document.querySelectorAll('.code-editor');
+            
+            editors.forEach(editor => {
+                editor.addEventListener('input', () => {
+                    clearTimeout(typingTimer);
+                    typingTimer = setTimeout(executeCode, 2000);
+                });
+            });
         });
     </script>
 </body>
