@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online Code Playground</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-color: #4a6fa5;
+      --secondary-color: #166088;
+      --dark-color: #1a2639;
+      --light-color: #f0f0f0;
+      --success-color: #4caf50;
+      --warning-color: #ff9800;
+      --danger-color: #f44336;
+      --editor-bg: #1e1e1e;
+      --editor-text: #d4d4d4;
+      --header-height: 60px;
+      --footer-height: 40px;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      background-color: #f5f5f5;
+      color: #333;
+    }
+    
+    header {
+      background-color: var(--dark-color);
+      color: white;
+      padding: 0 1rem;
+      height: var(--header-height);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+    
+    .logo i {
+      font-size: 1.5rem;
+      color: var(--primary-color);
+    }
+    
+    .controls {
+      display: flex;
+      gap: 10px;
+    }
+    
+    button {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    button:hover {
+      background-color: var(--secondary-color);
+      transform: translateY(-1px);
+    }
+    
+    button:active {
+      transform: translateY(0);
+    }
+    
+    .run-btn {
+      background-color: var(--success-color);
+    }
+    
+    .download-btn {
+      background-color: var(--warning-color);
+    }
+    
+    .clear-btn {
+      background-color: var(--danger-color);
+    }
+    
+    .view-mode-btn {
+      background-color: #9c27b0;
+    }
+    
+    .main-container {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+    }
+    
+    .editor-panel {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      overflow: hidden;
+    }
+    
+    .editor-container {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      overflow: hidden;
+    }
+    
+    .editor-tabs {
+      display: flex;
+      background-color: var(--dark-color);
+      position: relative;
+    }
+    
+    .editor-tab {
+      padding: 0.5rem 1rem;
+      color: white;
+      cursor: pointer;
+      border-right: 1px solid rgba(255,255,255,0.1);
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    .editor-tab.active {
+      background-color: var(--editor-bg);
+      color: var(--primary-color);
+      font-weight: bold;
+    }
+    
+    .editor-actions {
+      position: absolute;
+      right: 10px;
+      display: flex;
+      gap: 5px;
+    }
+    
+    .editor-action {
+      background: transparent;
+      color: white;
+      padding: 0.3rem;
+      font-size: 0.8rem;
+      border-radius: 3px;
+    }
+    
+    .editor-action:hover {
+      background: rgba(255,255,255,0.1);
+    }
+    
+    .code-editor {
+      flex: 1;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    textarea {
+      width: 100%;
+      height: 100%;
+      font-family: 'Fira Code', 'Courier New', monospace;
+      padding: 1rem;
+      resize: none;
+      border: none;
+      background-color: var(--editor-bg);
+      color: var(--editor-text);
+      font-size: 14px;
+      line-height: 1.5;
+      tab-size: 2;
+    }
+    
+    .output-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      border-left: 1px solid #ddd;
+      background-color: white;
+    }
+    
+    .output-header {
+      padding: 0.5rem 1rem;
+      background-color: #eee;
+      border-bottom: 1px solid #ddd;
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .output-actions {
+      display: flex;
+      gap: 5px;
+    }
+    
+    iframe {
+      flex: 1;
+      border: none;
+      background-color: white;
+    }
+    
+    .device-mockup {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 10;
+    }
+    
+    .desktop-mockup {
+      border: 12px solid #333;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    }
+    
+    .mobile-mockup {
+      border: 30px solid #333;
+      border-top-width: 50px;
+      border-bottom-width: 50px;
+      border-radius: 30px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+      max-width: 375px;
+      max-height: 667px;
+      margin: 0 auto;
+    }
+    
+    footer {
+      background-color: var(--dark-color);
+      color: white;
+      text-align: center;
+      padding: 0.5rem;
+      height: var(--footer-height);
+      font-size: 0.8rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    /* Responsive layout */
+    @media (max-width: 768px) {
+      .main-container {
+        flex-direction: column;
+      }
+      
+      .editor-container {
+        height: 60vh;
+      }
+      
+      .output-container {
+        height: 40vh;
+      }
+      
+      .editor-tabs {
+        overflow-x: auto;
+      }
+      
+      .editor-tab {
+        min-width: 80px;
+        white-space: nowrap;
+      }
+      
+      .controls button span {
+        display: none;
+      }
+      
+      .controls button i {
+        margin-right: 0;
+      }
+    }
+    
+    /* Split screen layout for desktop */
+    @media (min-width: 769px) {
+      .main-container {
+        flex-direction: row;
+      }
+      
+      .editor-panel {
+        width: 50%;
+      }
+      
+      .output-container {
+        width: 50%;
+      }
+    }
+    
+    /* Syntax highlighting (basic) */
+    .html-code { color: #e06c75; }
+    .css-code { color: #61afef; }
+    .js-code { color: #e5c07b; }
+    
+    /* View mode selector */
+    .view-mode-selector {
+      position: absolute;
+      right: 10px;
+      top: 100%;
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      z-index: 100;
+      display: none;
+      flex-direction: column;
+    }
+    
+    .view-mode-selector.show {
+      display: flex;
+    }
+    
+    .view-mode-option {
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    
+    .view-mode-option:hover {
+      background-color: #f5f5f5;
+    }
+    
+    .view-mode-option i {
+      margin-right: 5px;
+      color: var(--primary-color);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <i class="fas fa-code"></i>
+      <span>Code Playground</span>
+    </div>
+    <div class="controls">
+      <button class="run-btn" onclick="runCode()">
+        <i class="fas fa-play"></i> <span>Run</span>
+      </button>
+      <button class="clear-btn" onclick="clearCode()">
+        <i class="fas fa-trash"></i> <span>Clear</span>
+      </button>
+      <button onclick="resetCode()">
+        <i class="fas fa-redo"></i> <span>Reset</span>
+      </button>
+      <button class="download-btn" onclick="downloadCode()">
+        <i class="fas fa-download"></i> <span>Download</span>
+      </button>
+      <div style="position: relative;">
+        <button class="view-mode-btn" onclick="toggleViewModeSelector()">
+          <i class="fas fa-desktop"></i> <span>View Mode</span>
+        </button>
+        <div class="view-mode-selector" id="viewModeSelector">
+          <div class="view-mode-option" onclick="setViewMode('default')">
+            <i class="fas fa-window-maximize"></i> Default View
+          </div>
+          <div class="view-mode-option" onclick="setViewMode('desktop')">
+            <i class="fas fa-desktop"></i> Desktop Mockup
+          </div>
+          <div class="view-mode-option" onclick="setViewMode('mobile')">
+            <i class="fas fa-mobile-alt"></i> Mobile Mockup
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  
+  <div class="main-container">
+    <div class="editor-panel">
+      <div class="editor-tabs">
+        <div class="editor-tab active" onclick="switchTab('html')">
+          <i class="fab fa-html5"></i> HTML
+        </div>
+        <div class="editor-tab" onclick="switchTab('css')">
+          <i class="fab fa-css3-alt"></i> CSS
+        </div>
+        <div class="editor-tab" onclick="switchTab('js')">
+          <i class="fab fa-js"></i> JavaScript
+        </div>
+        <div class="editor-actions">
+          <button class="editor-action" title="Download this file" onclick="downloadCurrentFile()">
+            <i class="fas fa-download"></i>
+          </button>
+          <button class="editor-action" title="Copy to clipboard" onclick="copyCurrentCode()">
+            <i class="fas fa-copy"></i>
+          </button>
+        </div>
+      </div>
+      <div class="editor-container">
+        <div class="code-editor" id="html-editor">
+          <textarea id="html-code" class="html-code" spellcheck="false"></textarea>
+        </div>
+        <div class="code-editor" id="css-editor" style="display:none;">
+          <textarea id="css-code" class="css-code" spellcheck="false"></textarea>
+        </div>
+        <div class="code-editor" id="js-editor" style="display:none;">
+          <textarea id="js-code" class="js-code" spellcheck="false"></textarea>
+        </div>
+      </div>
+    </div>
+    
+    <div class="output-container">
+      <div class="output-header">
+        <span>Output Preview</span>
+        <div class="output-actions">
+          <button onclick="refreshOutput()" style="padding: 0.2rem 0.5rem; font-size: 0.8rem;">
+            <i class="fas fa-sync-alt"></i> Refresh
+          </button>
+          <button onclick="openInNewTab()" style="padding: 0.2rem 0.5rem; font-size: 0.8rem;">
+            <i class="fas fa-external-link-alt"></i> New Tab
+          </button>
+        </div>
+      </div>
+      <iframe id="output"></iframe>
+    </div>
+  </div>
+  
+  <footer>
+    <div>Online Code Playground &copy; 2023</div>
+    <div>
+      <a href="https://github.com/" target="_blank" style="color: white;">
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+  </footer>
+
+  <script>
+    // Current active tab
+    let currentTab = 'html';
+    let currentViewMode = 'default';
+    
+    // Initialize with empty editors
+    function initializeEditors() {
+      document.getElementById('html-code').value = '';
+      document.getElementById('css-code').value = '';
+      document.getElementById('js-code').value = '';
+      runCode();
+    }
+    
+    // Run code
+    function runCode() {
+      const html = document.getElementById('html-code').value;
+      const css = document.getElementById('css-code').value;
+      const js = document.getElementById('js-code').value;
+
+      const output = document.getElementById('output');
+      output.srcdoc = `
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <style>${css}</style>
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        </head>
+        <body>
+          ${html}
+          <script>${js}<\/script>
+        </body>
+        </html>
+      `;
+      
+      // Update view mode when code runs
+      updateViewMode();
+    }
+    
+    // Reset to empty editors
+    function resetCode() {
+      if (confirm('Are you sure you want to reset all editors to empty?')) {
+        initializeEditors();
+      }
+    }
+    
+    // Clear all code
+    function clearCode() {
+      if (confirm('Are you sure you want to clear all code?')) {
+        document.getElementById('html-code').value = '';
+        document.getElementById('css-code').value = '';
+        document.getElementById('js-code').value = '';
+        runCode();
+      }
+    }
+    
+    function refreshOutput() {
+      runCode();
+    }
+    
+    function openInNewTab() {
+      const html = document.getElementById('html-code').value;
+      const css = document.getElementById('css-code').value;
+      const js = document.getElementById('js-code').value;
+      
+      const blob = new Blob([`
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <style>${css}</style>
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        </head>
+        <body>
+          ${html}
+          <script>${js}<\/script>
+        </body>
+        </html>
+      `], { type: 'text/html' });
+      
+      const url = URL.createObjectURL(blob);
+      window.open(url, '_blank');
+    }
+    
+    function switchTab(tabName) {
+      currentTab = tabName;
+      
+      // Hide all editors
+      document.querySelectorAll('.code-editor').forEach(editor => {
+        editor.style.display = 'none';
+      });
+      
+      // Remove active class from all tabs
+      document.querySelectorAll('.editor-tab').forEach(tab => {
+        tab.classList.remove('active');
+      });
+      
+      // Show selected editor and mark tab as active
+      document.getElementById(`${tabName}-editor`).style.display = 'block';
+      document.querySelector(`.editor-tab:nth-child(${
+        tabName === 'html' ? 1 : tabName === 'css' ? 2 : 3
+      })`).classList.add('active');
+    }
+    
+    function downloadCode() {
+      const html = document.getElementById('html-code').value;
+      const css = document.getElementById('css-code').value;
+      const js = document.getElementById('js-code').value;
+      
+      // Create HTML file
+      downloadFile('index.html', html);
+      
+      // Create CSS file
+      downloadFile('styles.css', css);
+      
+      // Create JS file
+      downloadFile('script.js', js);
+    }
+    
+    function downloadCurrentFile() {
+      let content, filename, mimeType;
+      
+      switch(currentTab) {
+        case 'html':
+          content = document.getElementById('html-code').value;
+          filename = 'index.html';
+          mimeType = 'text/html';
+          break;
+        case 'css':
+          content = document.getElementById('css-code').value;
+          filename = 'styles.css';
+          mimeType = 'text/css';
+          break;
+        case 'js':
+          content = document.getElementById('js-code').value;
+          filename = 'script.js';
+          mimeType = 'text/javascript';
+          break;
+      }
+      
+      downloadFile(filename, content, mimeType);
+    }
+    
+    function downloadFile(filename, content, mimeType = 'text/plain') {
+      const blob = new Blob([content], { type: mimeType });
+      const url = URL.createObjectURL(blob);
+      
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      
+      setTimeout(() => {
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      }, 100);
+    }
+    
+    function copyCurrentCode() {
+      let content;
+      
+      switch(currentTab) {
+        case 'html':
+          content = document.getElementById('html-code').value;
+          break;
+        case 'css':
+          content = document.getElementById('css-code').value;
+          break;
+        case 'js':
+          content = document.getElementById('js-code').value;
+          break;
+      }
+      
+      navigator.clipboard.writeText(content).then(() => {
+        alert(`${currentTab.toUpperCase()} code copied to clipboard!`);
+      }).catch(err => {
+        console.error('Failed to copy: ', err);
+      });
+    }
+    
+    function toggleViewModeSelector() {
+      const selector = document.getElementById('viewModeSelector');
+      selector.classList.toggle('show');
+    }
+    
+    function setViewMode(mode) {
+      currentViewMode = mode;
+      document.getElementById('viewModeSelector').classList.remove('show');
+      updateViewMode();
+    }
+    
+    function updateViewMode() {
+      const output = document.getElementById('output');
+      
+      // Wait for iframe to load
+      output.onload = function() {
+        const mockup = output.contentDocument.querySelector('.device-mockup');
+        
+        // Remove existing mockup if any
+        if (mockup) {
+          mockup.remove();
+        }
+        
+        // Add new mockup based on view mode
+        if (currentViewMode === 'desktop') {
+          const desktopMockup = document.createElement('div');
+          desktopMockup.className = 'device-mockup desktop-mockup';
+          output.contentDocument.body.appendChild(desktopMockup);
+          output.contentDocument.body.style.padding = '0';
+        } 
+        else if (currentViewMode === 'mobile') {
+          const mobileMockup = document.createElement('div');
+          mobileMockup.className = 'device-mockup mobile-mockup';
+          output.contentDocument.body.appendChild(mobileMockup);
+          output.contentDocument.body.style.padding = '0';
+        }
+      };
+    }
+    
+    // Close view mode selector when clicking outside
+    document.addEventListener('click', function(event) {
+      const viewModeBtn = document.querySelector('.view-mode-btn');
+      const selector = document.getElementById('viewModeSelector');
+      
+      if (!event.target.closest('.view-mode-btn') && !event.target.closest('.view-mode-selector')) {
+        selector.classList.remove('show');
+      }
+    });
+    
+    // Initialize with empty editors
+    window.onload = initializeEditors;
+  </script>
+</body>
+</html>
