@@ -1,10 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Online Code Playground</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Primary Meta Tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Title (58 characters) -->
+    <title>Code Playground | Live HTML, CSS, JavaScript Editor by Kiran TM</title>
+    
+    <!-- SEO Description (154 characters) -->
+    <meta name="description" content="Interactive online code editor for HTML, CSS, and JavaScript with live preview. Perfect for testing code snippets and learning web development.">
+    
+    <!-- Keywords -->
+    <meta name="keywords" content="online code editor, HTML playground, CSS tester, JavaScript sandbox, web development tools, frontend coding">
+    
+    <!-- Author and Copyright -->
+    <meta name="author" content="Kiran TM">
+    <meta name="copyright" content="Kiran TM">
+    
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="Interactive Code Playground by Kiran TM">
+    <meta property="og:description" content="Real-time HTML, CSS, and JavaScript editor with live preview">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kirantm36.github.io/codeplayground/">
+    <meta property="og:image" content="https://kirantm36.github.io/codeplayground/assets/social-preview.png">
+    <meta property="og:site_name" content="Kiran TM's Code Playground">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:creator" content="@kirantm36">
+    <meta name="twitter:title" content="Code Playground by Kiran TM">
+    <meta name="twitter:description" content="Interactive web development environment for HTML, CSS and JavaScript">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://kirantm36.github.io/codeplayground/">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+    
+    <!-- Preload Resources -->
+    <link rel="preload" href="styles.css" as="style">
+    <link rel="preload" href="script.js" as="script">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css">
   <style>
     :root {
       --primary-color: #4a6fa5;
@@ -340,334 +380,159 @@
       color: var(--primary-color);
     }
   </style>
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Code Playground",
+      "description": "Interactive online code editor for HTML, CSS, and JavaScript",
+      "url": "https://kirantm36.github.io/codeplayground/",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Web Browser",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Kiran TM"
+      }
+    }
+    </script>
 </head>
 <body>
-  <header>
-    <div class="logo">
-      <i class="fas fa-code"></i>
-      <span>Code Playground</span>
-    </div>
-    <div class="controls">
-      <button class="run-btn" onclick="runCode()">
-        <i class="fas fa-play"></i> <span>Run</span>
-      </button>
-      <button class="clear-btn" onclick="clearCode()">
-        <i class="fas fa-trash"></i> <span>Clear</span>
-      </button>
-      <button onclick="resetCode()">
-        <i class="fas fa-redo"></i> <span>Reset</span>
-      </button>
-      <button class="download-btn" onclick="downloadCode()">
-        <i class="fas fa-download"></i> <span>Download</span>
-      </button>
-      <div style="position: relative;">
-        <button class="view-mode-btn" onclick="toggleViewModeSelector()">
-          <i class="fas fa-desktop"></i> <span>View Mode</span>
-        </button>
-        <div class="view-mode-selector" id="viewModeSelector">
-          <div class="view-mode-option" onclick="setViewMode('default')">
-            <i class="fas fa-window-maximize"></i> Default View
-          </div>
-          <div class="view-mode-option" onclick="setViewMode('desktop')">
-            <i class="fas fa-desktop"></i> Desktop Mockup
-          </div>
-          <div class="view-mode-option" onclick="setViewMode('mobile')">
-            <i class="fas fa-mobile-alt"></i> Mobile Mockup
-          </div>
+    <!-- Skip to Content Link for Accessibility -->
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    
+    <!-- Header Section -->
+    <header class="page-header" role="banner">
+        <div class="header-content">
+            <h1>Interactive Code Playground</h1>
+            <p class="subtitle">Experiment with HTML, CSS, and JavaScript in real-time</p>
+            <nav class="social-links" aria-label="Social media links">
+                <a href="https://github.com/kirantm36" aria-label="GitHub profile">GitHub</a>
+                <a href="https://linkedin.com/in/kirantm" aria-label="LinkedIn profile">LinkedIn</a>
+            </nav>
         </div>
-      </div>
-    </div>
-  </header>
-  
-  <div class="main-container">
-    <div class="editor-panel">
-      <div class="editor-tabs">
-        <div class="editor-tab active" onclick="switchTab('html')">
-          <i class="fab fa-html5"></i> HTML
-        </div>
-        <div class="editor-tab" onclick="switchTab('css')">
-          <i class="fab fa-css3-alt"></i> CSS
-        </div>
-        <div class="editor-tab" onclick="switchTab('js')">
-          <i class="fab fa-js"></i> JavaScript
-        </div>
-        <div class="editor-actions">
-          <button class="editor-action" title="Download this file" onclick="downloadCurrentFile()">
-            <i class="fas fa-download"></i>
-          </button>
-          <button class="editor-action" title="Copy to clipboard" onclick="copyCurrentCode()">
-            <i class="fas fa-copy"></i>
-          </button>
-        </div>
-      </div>
-      <div class="editor-container">
-        <div class="code-editor" id="html-editor">
-          <textarea id="html-code" class="html-code" spellcheck="false"></textarea>
-        </div>
-        <div class="code-editor" id="css-editor" style="display:none;">
-          <textarea id="css-code" class="css-code" spellcheck="false"></textarea>
-        </div>
-        <div class="code-editor" id="js-editor" style="display:none;">
-          <textarea id="js-code" class="js-code" spellcheck="false"></textarea>
-        </div>
-      </div>
-    </div>
+    </header>
     
-    <div class="output-container">
-      <div class="output-header">
-        <span>Output Preview</span>
-        <div class="output-actions">
-          <button onclick="refreshOutput()" style="padding: 0.2rem 0.5rem; font-size: 0.8rem;">
-            <i class="fas fa-sync-alt"></i> Refresh
-          </button>
-          <button onclick="openInNewTab()" style="padding: 0.2rem 0.5rem; font-size: 0.8rem;">
-            <i class="fas fa-external-link-alt"></i> New Tab
-          </button>
-        </div>
-      </div>
-      <iframe id="output"></iframe>
-    </div>
-  </div>
-  
-  <footer>
-    <div>Online Code Playground &copy; 2023</div>
-    <div>
-      <a href="https://github.com/" target="_blank" style="color: white;">
-        <i class="fab fa-github"></i>
-      </a>
-    </div>
-  </footer>
-
-  <script>
-    // Current active tab
-    let currentTab = 'html';
-    let currentViewMode = 'default';
-    
-    // Initialize with empty editors
-    function initializeEditors() {
-      document.getElementById('html-code').value = '';
-      document.getElementById('css-code').value = '';
-      document.getElementById('js-code').value = '';
-      runCode();
-    }
-    
-    // Run code
-    function runCode() {
-      const html = document.getElementById('html-code').value;
-      const css = document.getElementById('css-code').value;
-      const js = document.getElementById('js-code').value;
-
-      const output = document.getElementById('output');
-      output.srcdoc = `
-        <!DOCTYPE html>
-        <html>
-        <head>
-          <style>${css}</style>
-          <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        </head>
-        <body>
-          ${html}
-          <script>${js}<\/script>
-        </body>
-        </html>
-      `;
-      
-      // Update view mode when code runs
-      updateViewMode();
-    }
-    
-    // Reset to empty editors
-    function resetCode() {
-      if (confirm('Are you sure you want to reset all editors to empty?')) {
-        initializeEditors();
-      }
-    }
-    
-    // Clear all code
-    function clearCode() {
-      if (confirm('Are you sure you want to clear all code?')) {
-        document.getElementById('html-code').value = '';
-        document.getElementById('css-code').value = '';
-        document.getElementById('js-code').value = '';
-        runCode();
-      }
-    }
-    
-    function refreshOutput() {
-      runCode();
-    }
-    
-    function openInNewTab() {
-      const html = document.getElementById('html-code').value;
-      const css = document.getElementById('css-code').value;
-      const js = document.getElementById('js-code').value;
-      
-      const blob = new Blob([`
-        <!DOCTYPE html>
-        <html>
-        <head>
-          <style>${css}</style>
-          <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        </head>
-        <body>
-          ${html}
-          <script>${js}<\/script>
-        </body>
-        </html>
-      `], { type: 'text/html' });
-      
-      const url = URL.createObjectURL(blob);
-      window.open(url, '_blank');
-    }
-    
-    function switchTab(tabName) {
-      currentTab = tabName;
-      
-      // Hide all editors
-      document.querySelectorAll('.code-editor').forEach(editor => {
-        editor.style.display = 'none';
-      });
-      
-      // Remove active class from all tabs
-      document.querySelectorAll('.editor-tab').forEach(tab => {
-        tab.classList.remove('active');
-      });
-      
-      // Show selected editor and mark tab as active
-      document.getElementById(`${tabName}-editor`).style.display = 'block';
-      document.querySelector(`.editor-tab:nth-child(${
-        tabName === 'html' ? 1 : tabName === 'css' ? 2 : 3
-      })`).classList.add('active');
-    }
-    
-    function downloadCode() {
-      const html = document.getElementById('html-code').value;
-      const css = document.getElementById('css-code').value;
-      const js = document.getElementById('js-code').value;
-      
-      // Create HTML file
-      downloadFile('index.html', html);
-      
-      // Create CSS file
-      downloadFile('styles.css', css);
-      
-      // Create JS file
-      downloadFile('script.js', js);
-    }
-    
-    function downloadCurrentFile() {
-      let content, filename, mimeType;
-      
-      switch(currentTab) {
-        case 'html':
-          content = document.getElementById('html-code').value;
-          filename = 'index.html';
-          mimeType = 'text/html';
-          break;
-        case 'css':
-          content = document.getElementById('css-code').value;
-          filename = 'styles.css';
-          mimeType = 'text/css';
-          break;
-        case 'js':
-          content = document.getElementById('js-code').value;
-          filename = 'script.js';
-          mimeType = 'text/javascript';
-          break;
-      }
-      
-      downloadFile(filename, content, mimeType);
-    }
-    
-    function downloadFile(filename, content, mimeType = 'text/plain') {
-      const blob = new Blob([content], { type: mimeType });
-      const url = URL.createObjectURL(blob);
-      
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = filename;
-      document.body.appendChild(a);
-      a.click();
-      
-      setTimeout(() => {
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-      }, 100);
-    }
-    
-    function copyCurrentCode() {
-      let content;
-      
-      switch(currentTab) {
-        case 'html':
-          content = document.getElementById('html-code').value;
-          break;
-        case 'css':
-          content = document.getElementById('css-code').value;
-          break;
-        case 'js':
-          content = document.getElementById('js-code').value;
-          break;
-      }
-      
-      navigator.clipboard.writeText(content).then(() => {
-        alert(`${currentTab.toUpperCase()} code copied to clipboard!`);
-      }).catch(err => {
-        console.error('Failed to copy: ', err);
-      });
-    }
-    
-    function toggleViewModeSelector() {
-      const selector = document.getElementById('viewModeSelector');
-      selector.classList.toggle('show');
-    }
-    
-    function setViewMode(mode) {
-      currentViewMode = mode;
-      document.getElementById('viewModeSelector').classList.remove('show');
-      updateViewMode();
-    }
-    
-    function updateViewMode() {
-      const output = document.getElementById('output');
-      
-      // Wait for iframe to load
-      output.onload = function() {
-        const mockup = output.contentDocument.querySelector('.device-mockup');
+    <!-- Main Content -->
+    <main id="main-content" class="playground-container" role="main">
+        <section class="editor-section" aria-labelledby="editor-heading">
+            <h2 id="editor-heading" class="visually-hidden">Code Editor</h2>
+            
+            <!-- Editor Tabs -->
+            <div class="editor-tabs" role="tablist">
+                <button id="html-tab" class="tab-button active" role="tab" aria-selected="true" aria-controls="html-editor">HTML</button>
+                <button id="css-tab" class="tab-button" role="tab" aria-selected="false" aria-controls="css-editor">CSS</button>
+                <button id="js-tab" class="tab-button" role="tab" aria-selected="false" aria-controls="js-editor">JavaScript</button>
+            </div>
+            
+            <!-- Editor Areas -->
+            <div class="editor-areas">
+                <textarea id="html-editor" class="code-editor active" role="tabpanel" aria-labelledby="html-tab" placeholder="<!-- Write your HTML here -->"></textarea>
+                <textarea id="css-editor" class="code-editor" role="tabpanel" aria-labelledby="css-tab" placeholder="/* Write your CSS here */"></textarea>
+                <textarea id="js-editor" class="code-editor" role="tabpanel" aria-labelledby="js-tab" placeholder="// Write your JavaScript here"></textarea>
+            </div>
+            
+            <!-- Control Buttons -->
+            <div class="editor-controls">
+                <button id="run-button" class="control-button primary">Run Code</button>
+                <button id="reset-button" class="control-button secondary">Reset</button>
+                <button id="save-button" class="control-button">Save Snippet</button>
+            </div>
+        </section>
         
-        // Remove existing mockup if any
-        if (mockup) {
-          mockup.remove();
-        }
+        <!-- Output Section -->
+        <section class="output-section" aria-labelledby="output-heading">
+            <h2 id="output-heading">Live Output Preview</h2>
+            <iframe id="output-frame" title="Code execution result" sandbox="allow-scripts"></iframe>
+        </section>
         
-        // Add new mockup based on view mode
-        if (currentViewMode === 'desktop') {
-          const desktopMockup = document.createElement('div');
-          desktopMockup.className = 'device-mockup desktop-mockup';
-          output.contentDocument.body.appendChild(desktopMockup);
-          output.contentDocument.body.style.padding = '0';
-        } 
-        else if (currentViewMode === 'mobile') {
-          const mobileMockup = document.createElement('div');
-          mobileMockup.className = 'device-mockup mobile-mockup';
-          output.contentDocument.body.appendChild(mobileMockup);
-          output.contentDocument.body.style.padding = '0';
-        }
-      };
-    }
+        <!-- Features Section -->
+        <section class="features-section" aria-labelledby="features-heading">
+            <h2 id="features-heading">Playground Features</h2>
+            <ul class="features-list">
+                <li>Real-time code execution</li>
+                <li>Separate editors for HTML, CSS, and JavaScript</li>
+                <li>Responsive output preview</li>
+                <li>No server-side processing - runs entirely in your browser</li>
+                <li>Mobile-friendly interface</li>
+            </ul>
+        </section>
+    </main>
     
-    // Close view mode selector when clicking outside
-    document.addEventListener('click', function(event) {
-      const viewModeBtn = document.querySelector('.view-mode-btn');
-      const selector = document.getElementById('viewModeSelector');
-      
-      if (!event.target.closest('.view-mode-btn') && !event.target.closest('.view-mode-selector')) {
-        selector.classList.remove('show');
-      }
-    });
+    <!-- Footer -->
+    <footer class="page-footer" role="contentinfo">
+        <div class="footer-content">
+            <p>Created by <a href="https://github.com/kirantm36" rel="author">Kiran TM</a></p>
+            <p>&copy; <span id="copyright-year"></span> All Rights Reserved</p>
+            <nav aria-label="Footer navigation">
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Use</a>
+                <a href="mailto:contact@example.com">Contact</a>
+            </nav>
+        </div>
+    </footer>
     
-    // Initialize with empty editors
-    window.onload = initializeEditors;
-  </script>
+    <!-- JavaScript -->
+    <script src="script.js" defer></script>
+    <script>
+        // Set copyright year
+        document.getElementById('copyright-year').textContent = new Date().getFullYear();
+        
+        // Simple tab switching functionality
+        document.querySelectorAll('.tab-button').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and editors
+                document.querySelectorAll('.tab-button, .code-editor').forEach(el => {
+                    el.classList.remove('active');
+                    el.setAttribute('aria-selected', 'false');
+                });
+                
+                // Add active class to clicked tab and corresponding editor
+                tab.classList.add('active');
+                tab.setAttribute('aria-selected', 'true');
+                const editorId = tab.id.replace('-tab', '-editor');
+                document.getElementById(editorId).classList.add('active');
+            });
+        });
+        
+        // Run code functionality
+        document.getElementById('run-button').addEventListener('click', () => {
+            const html = document.getElementById('html-editor').value;
+            const css = document.getElementById('css-editor').value;
+            const js = document.getElementById('js-editor').value;
+            
+            const iframe = document.getElementById('output-frame');
+            const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+            
+            iframeDoc.open();
+            iframeDoc.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <style>${css}</style>
+                </head>
+                <body>
+                    ${html}
+                    <script>${js}<\/script>
+                </body>
+                </html>
+            `);
+            iframeDoc.close();
+        });
+        
+        // Reset functionality
+        document.getElementById('reset-button').addEventListener('click', () => {
+            document.getElementById('html-editor').value = '';
+            document.getElementById('css-editor').value = '';
+            document.getElementById('js-editor').value = '';
+            document.getElementById('output-frame').srcdoc = '';
+        });
+    </script>
 </body>
 </html>
